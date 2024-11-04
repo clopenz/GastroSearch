@@ -1,6 +1,7 @@
 let map;
 let currentController;
 let locations = [];
+let markers = [];
 const resultsContainer = document.querySelector('.results-container');
 
 document.querySelector('#search-form').addEventListener('submit', (e) => {
@@ -113,12 +114,16 @@ function fetchPlaces(url) {
 
 // Show markers on the map
 function showMarkers() {
+	markers.forEach((marker) => marker.setMap(null));
+
 	locations.forEach((location) => {
 		const marker = new google.maps.Marker({
 			position: { lat: location.location.lat, lng: location.location.lng },
 			map: map,
 			title: location.title,
 		});
+
+		markers.push(marker);
 	});
 
 	const bounds = new google.maps.LatLngBounds();

@@ -36,6 +36,13 @@ body {
 }
 
 /* Title and description */
+
+.title-container {
+	display: flex;
+	h3 {
+		color: #fff;
+	}
+}
 .title {
 	margin-top: 20px;
 	margin-left: 20px;
