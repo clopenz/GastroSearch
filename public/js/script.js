@@ -2,6 +2,8 @@ let map;
 let currentController;
 let locations = [];
 let markers = [];
+let currentInfoWindow;
+let hours = '';
 const resultsContainer = document.querySelector('.results-container');
 
 document.querySelector('#search-form').addEventListener('submit', (e) => {
@@ -61,8 +63,6 @@ function fetchPlaces(url) {
 			data.forEach((place, index) => {
 				locations = [...locations, place];
 
-				let hours = '';
-
 				if (!place.hours) {
 					hours = '';
 				} else if (place.hours.open_now) {
@@ -112,6 +112,49 @@ function fetchPlaces(url) {
 					map.setCenter(position);
 
 					map.setZoom(15);
+
+					// Create an info window and open it
+					if (currentInfoWindow) {
+						currentInfoWindow.close();
+					}
+
+					const infoWindow = new google.maps.InfoWindow({
+						content: `<div class="name">
+							${place.name}
+						</div> 
+
+						<div class="rating"><i class="fa-solid fa-star"></i>
+							${place.rating ? place.rating + ' (' + place.ratings_total + ')' : '-'}
+						</div>
+						
+						<div class="address">
+							${place.vicinity}
+						</div>
+
+						${place.phone ? '<div class="phone">' + place.phone + '</div>' : ''}
+
+						${hours}
+					
+						${
+							place.website
+								? '<div class="website"><a href="' +
+								  place.website +
+								  '">Website</a></div>'
+								: ''
+						}
+
+						${
+							place.url
+								? '<div class="google-maps-link"><a href="' +
+								  place.url +
+								  '">Open in Google Maps</a></div>'
+								: ''
+						}`,
+					});
+
+					currentInfoWindow = infoWindow;
+
+					currentInfoWindow.open(map, marker);
 				});
 
 				places.appendChild(li);
@@ -144,11 +187,13 @@ function fetchPlaces(url) {
 function showMarkers() {
 	markers.forEach((marker) => marker.setMap(null));
 
+	markers = [];
+
 	locations.forEach((location, index) => {
 		const marker = new google.maps.Marker({
 			position: { lat: location.location.lat, lng: location.location.lng },
 			map: map,
-			title: location.title,
+			title: location.name,
 		});
 
 		// Add click event listener to each marker
@@ -157,6 +202,49 @@ function showMarkers() {
 			map.setCenter(position);
 
 			map.setZoom(15);
+
+			// Create an info window and open it
+			if (currentInfoWindow) {
+				currentInfoWindow.close();
+			}
+
+			const infoWindow = new google.maps.InfoWindow({
+				content: `<div class="name">
+							${location.name}
+						</div> 
+
+						<div class="rating"><i class="fa-solid fa-star"></i>
+							${location.rating ? location.rating + ' (' + location.ratings_total + ')' : '-'}
+						</div>
+						
+						<div class="address">
+							${location.vicinity}
+						</div>
+
+						${location.phone ? '<div class="phone">' + location.phone + '</div>' : ''}
+
+						${hours}
+					
+						${
+							location.website
+								? '<div class="website"><a href="' +
+								  location.website +
+								  '">Website</a></div>'
+								: ''
+						}
+
+						${
+							location.url
+								? '<div class="google-maps-link"><a href="' +
+								  location.url +
+								  '">Open in Google Maps</a></div>'
+								: ''
+						}`,
+			});
+
+			currentInfoWindow = infoWindow;
+
+			currentInfoWindow.open(map, marker);
 		});
 
 		markers.push(marker);
