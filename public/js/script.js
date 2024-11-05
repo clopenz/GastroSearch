@@ -14,6 +14,7 @@ document.querySelector('#search-form-mini').addEventListener('submit', (e) => {
 	handleFormSubmit('#search-form-mini');
 });
 
+// Handle form submission
 function handleFormSubmit(formId) {
 	const city = document.querySelector(`${formId} #city`).value;
 	const state = document.querySelector(`${formId} #state`).value;
@@ -60,6 +61,16 @@ function fetchPlaces(url) {
 			data.forEach((place) => {
 				locations = [...locations, place];
 
+				let hours = '';
+
+				if (!place.hours) {
+					hours = '';
+				} else if (place.hours.open_now) {
+					hours = '<div class="hours open">Open Now</div>';
+				} else {
+					hours = '<div class="hours closed">Closed</div>';
+				}
+
 				const li = document.createElement('li');
 				li.innerHTML = `
 
@@ -71,17 +82,21 @@ function fetchPlaces(url) {
 
             <div class="address">${place.vicinity}</div>
 
-				${
-					place.hours && place.hours.open_now
-						? '<div class="hours open">Open Now</div>'
-						: '<div class="hours closed">Closed</div>'
-				}
+				${hours}
 
 				${
 					place.website
 						? '<div class="website"><a href="' +
 						  place.website +
 						  '">Website</a></div>'
+						: ''
+				}
+
+				${
+					place.url
+						? '<div class="google-maps-link"><a href="' +
+						  place.url +
+						  '">Open in Google Maps</a></div>'
 						: ''
 				}
       `;
@@ -121,6 +136,13 @@ function showMarkers() {
 			position: { lat: location.location.lat, lng: location.location.lng },
 			map: map,
 			title: location.title,
+		});
+
+		marker.addListener('click', () => {
+			const position = marker.getPosition();
+			map.setCenter(position);
+
+			map.setZoom(15);
 		});
 
 		markers.push(marker);

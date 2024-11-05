@@ -81,6 +81,7 @@ app.get('/api/places', async (req, res) => {
 				hours: details.opening_hours,
 				website: details.website,
 				location: details.geometry.location,
+				url: details.url,
 			};
 		});
 
