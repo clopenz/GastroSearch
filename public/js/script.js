@@ -6,6 +6,20 @@ let currentInfoWindow;
 let hours = '';
 const resultsContainer = document.querySelector('.results-container');
 
+document.querySelector('.menu-toggle').addEventListener('click', () => {
+	const placesContainer = document.querySelector('.places-container');
+	const menuOpen = document.querySelector('.menu-open');
+	menuOpen.classList.remove('hidden');
+	placesContainer.classList.add('hidden');
+});
+
+document.querySelector('.menu-open').addEventListener('click', () => {
+	const placesContainer = document.querySelector('.places-container');
+	const menuOpen = document.querySelector('.menu-open');
+	menuOpen.classList.add('hidden');
+	placesContainer.classList.remove('hidden');
+});
+
 document.querySelector('#search-form').addEventListener('submit', (e) => {
 	e.preventDefault();
 	handleFormSubmit('#search-form');
