@@ -156,6 +156,8 @@ body {
 .places-container {
 	position: absolute;
 	z-index: 10;
+	display: flex;
+	flex-direction: column;
 	width: 400px;
 	height: 100%;
 	overflow-y: auto;
@@ -166,6 +168,11 @@ body {
 
 .places-container.hidden {
 	display: none;
+}
+
+.places-content {
+	flex: 1;
+	overflow-y: auto;
 }
 
 .places {
@@ -230,11 +237,43 @@ body {
 	color: rgb(26, 125, 255);
 }
 
+.menu-footer {
+	position: sticky;
+	display: flex;
+	width: 100%;
+	align-self: flex-end;
+	bottom: 0;
+
+	padding: 0 10px;
+	border-bottom: 1px solid #c7c7c7;
+	backdrop-filter: saturate(200%) blur(20px);
+	background-color: rgba(255, 255, 255, 1);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+	height: 50px;
+}
+
+.social-links {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+
+	a {
+		text-decoration: none;
+		color: #2178eb;
+	}
+
+	a:hover {
+		color: #eee;
+	}
+}
+
 .menu-toggle {
 	background: none;
 	border: none;
-
-	height: 35%;
+	padding: 5px;
+	height: 50%;
+	border-radius: 10px;
 
 	img {
 		width: 100%;
@@ -243,18 +282,21 @@ body {
 
 	&:hover {
 		cursor: pointer;
+		background-color: rgb(245, 244, 244);
 	}
 }
 
 .menu-open {
 	position: absolute;
-	top: 200px;
+	top: 50px;
 	backdrop-filter: saturate(200%) blur(20px);
 	background-color: rgba(255, 255, 255, 1);
 	border: none;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 	color: #70757a;
+	font-weight: bold;
 	z-index: 100;
 	padding: 5px 15px;
 
@@ -265,6 +307,8 @@ body {
 
 	&:hover {
 		cursor: pointer;
+		backdrop-filter: saturate(200%) blur(20px);
+		background-color: rgb(245, 244, 244);
 	}
 }
 
@@ -355,3 +399,60 @@ i.fa-star {
 		background-color: rgb(76, 154, 255, 0.1);
 	}
 }
+
+/* Media Queries */
+
+/* Mobile: 320-480px */
+@media (max-width: 372px) {
+	.menu-open {
+		top: 250px;
+		font-size: 12px;
+		padding: 3px 10px;
+		img {
+			width: 25px;
+			height: 25px;
+		}
+	}
+}
+
+@media (max-width: 425px) {
+	.places-container {
+		width: 325px;
+	}
+}
+
+/* Tablets: 481-768px */
+@media (max-width: 569px) {
+	.results-container .search-form-mini {
+		display: flex;
+		font-size: 12px;
+		padding: 0.5rem;
+	}
+
+	.results-container .search-form-mini .search-button {
+		font-size: 12px;
+		flex-basis: 0%;
+		height: 30px;
+		align-self: flex-end;
+	}
+
+	.results-container .search-form-mini .zip-container {
+		margin-top: 2px;
+	}
+}
+
+@media (max-width: 768px) and (min-width: 373px) {
+	.menu-open {
+		top: 200px;
+	}
+
+	.results-container .search-form-mini {
+		justify-self: center;
+	}
+}
+
+/* Small screens: 769-1024px */
+
+/* Desktop/Large screens: 1025-1440px */
+
+/* Extra large screens: 1440px and up */
