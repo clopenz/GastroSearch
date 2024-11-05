@@ -58,7 +58,7 @@ function fetchPlaces(url) {
 			places.innerHTML = '';
 
 			// Iterate through places and append them to the list
-			data.forEach((place) => {
+			data.forEach((place, index) => {
 				locations = [...locations, place];
 
 				let hours = '';
@@ -77,10 +77,12 @@ function fetchPlaces(url) {
             <div class="name">${place.name}</div>
 
 				<div class="rating"><i class="fa-solid fa-star"></i>${
-					place.rating ? place.rating : '-'
+					place.rating ? place.rating + ' (' + place.ratings_total + ')' : '-'
 				}</div>
 
             <div class="address">${place.vicinity}</div>
+
+				${place.phone ? '<div class="phone">' + place.phone + '</div>' : ''}
 
 				${hours}
 
@@ -99,7 +101,18 @@ function fetchPlaces(url) {
 						  '">Open in Google Maps</a></div>'
 						: ''
 				}
+
+				
       `;
+
+				// Add click event listener to each place
+				li.addEventListener('click', () => {
+					const marker = markers[index];
+					const position = marker.getPosition();
+					map.setCenter(position);
+
+					map.setZoom(15);
+				});
 
 				places.appendChild(li);
 			});
@@ -131,13 +144,14 @@ function fetchPlaces(url) {
 function showMarkers() {
 	markers.forEach((marker) => marker.setMap(null));
 
-	locations.forEach((location) => {
+	locations.forEach((location, index) => {
 		const marker = new google.maps.Marker({
 			position: { lat: location.location.lat, lng: location.location.lng },
 			map: map,
 			title: location.title,
 		});
 
+		// Add click event listener to each marker
 		marker.addListener('click', () => {
 			const position = marker.getPosition();
 			map.setCenter(position);

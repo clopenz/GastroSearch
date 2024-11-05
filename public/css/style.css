@@ -170,11 +170,15 @@ body {
 
 		padding: 20px;
 		padding-left: 20px;
-		border-bottom: 1px solid #c7c7c7;
+
 		border-top: 1px solid #c7c7c7;
 
+		&:last-child {
+			border-bottom: 1px solid #c7c7c7;
+		}
+
 		&:hover {
-			background-color: rgba(255, 255, 255, 0.5);
+			background-color: rgba(255, 255, 255, 0.705);
 			cursor: pointer;
 		}
 	}
@@ -218,6 +222,10 @@ i.fa-star {
 	margin-bottom: 5px;
 }
 
+.phone {
+	margin-bottom: 5px;
+}
+
 .hours.open {
 	font-weight: bold;
 	color: green;
@@ -255,7 +263,7 @@ i.fa-star {
 .google-maps-link {
 	text-align: center;
 
-	margin-top: 15px;
+	margin-top: 10px;
 
 	a {
 		display: block;

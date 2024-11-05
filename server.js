@@ -78,8 +78,10 @@ app.get('/api/places', async (req, res) => {
 				name: details.name,
 				vicinity: details.vicinity,
 				rating: details.rating,
+				ratings_total: details.user_ratings_total,
 				hours: details.opening_hours,
 				website: details.website,
+				phone: details.formatted_phone_number,
 				location: details.geometry.location,
 				url: details.url,
 			};
