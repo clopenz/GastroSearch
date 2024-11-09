@@ -27,6 +27,8 @@ document
 	.addEventListener('click', () => {
 		const miniSearchForm = document.querySelector('.search-form-mini');
 		miniSearchForm.classList.add('hidden');
+		setTimeout(() => (miniSearchForm.style.visibility = 'hidden'), 300);
+
 		const searchClose = document.querySelector('.search-toggle');
 		searchClose.classList.add('hide');
 		const searchOpen = document.querySelector('.search-open');
@@ -35,6 +37,7 @@ document
 
 document.querySelector('.search-open').addEventListener('click', () => {
 	const miniSearchForm = document.querySelector('.search-form-mini');
+	miniSearchForm.style.visibility = 'visible';
 	miniSearchForm.classList.remove('hidden');
 	const searchClose = document.querySelector('.search-toggle');
 	searchClose.classList.remove('hide');
