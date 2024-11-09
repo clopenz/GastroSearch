@@ -118,7 +118,7 @@
 		</div>
 
 		<div class="results-container hidden">
-			<button class="menu-open hidden">
+			<button class="tab menu-open hidden">
 				<img src="images/main-menu.png" alt="" />
 				<div class="menu-label">Results</div>
 			</button>
@@ -161,7 +161,15 @@
 				</div>
 			</div>
 
-			<form id="search-form-mini" class="search-form-mini">
+			<button class="tab search-open">
+				<img src="images/open-search.png" alt="" />
+				<div class="menu-label">Search</div>
+			</button>
+
+			<form id="search-form-mini" class="search-form-mini hidden">
+				<div class="search-toggle hide">
+					<img src="images/close.png" alt="" />
+				</div>
 				<div class="state-container">
 					<label for="state">State</label>
 					<select name="state" id="state">

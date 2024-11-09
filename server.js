@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 // Nearby Search with Pagination Support
 app.get('/api/places', async (req, res) => {
 	const { location, radius, keyword } = req.query;
-	const apiKey = 'AIzaSyD6CnVdH_CGjfZHfnksvGbL69aOw0HRvFw';
+	const apiKey = 'AIzaSyBoxWqRkmybANqb4k7HkSLg6ZCrgcDNWKY';
 	let allResults = [];
 
 	try {
@@ -98,7 +98,7 @@ app.get('/api/places', async (req, res) => {
 app.get('/api/geocode', async (req, res) => {
 	const { address } = req.query;
 
-	const apiKey = 'AIzaSyD6CnVdH_CGjfZHfnksvGbL69aOw0HRvFw';
+	const apiKey = 'AIzaSyBoxWqRkmybANqb4k7HkSLg6ZCrgcDNWKY';
 
 	try {
 		// Call Google Geocoding API

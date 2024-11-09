@@ -6,6 +6,7 @@ let currentInfoWindow;
 let hours = '';
 const resultsContainer = document.querySelector('.results-container');
 
+// Open and close menu
 document.querySelector('.menu-toggle').addEventListener('click', () => {
 	const placesContainer = document.querySelector('.places-container');
 	const menuOpen = document.querySelector('.menu-open');
@@ -20,6 +21,28 @@ document.querySelector('.menu-open').addEventListener('click', () => {
 	placesContainer.classList.remove('hidden');
 });
 
+// Open and close mini search form
+document
+	.querySelector('.search-form-mini .search-toggle')
+	.addEventListener('click', () => {
+		const miniSearchForm = document.querySelector('.search-form-mini');
+		miniSearchForm.classList.add('hidden');
+		const searchClose = document.querySelector('.search-toggle');
+		searchClose.classList.add('hide');
+		const searchOpen = document.querySelector('.search-open');
+		searchOpen.classList.remove('hidden');
+	});
+
+document.querySelector('.search-open').addEventListener('click', () => {
+	const miniSearchForm = document.querySelector('.search-form-mini');
+	miniSearchForm.classList.remove('hidden');
+	const searchClose = document.querySelector('.search-toggle');
+	searchClose.classList.remove('hide');
+	const searchOpen = document.querySelector('.search-open');
+	searchOpen.classList.add('hidden');
+});
+
+// Form submit
 document.querySelector('#search-form').addEventListener('submit', (e) => {
 	e.preventDefault();
 	handleFormSubmit('#search-form');
