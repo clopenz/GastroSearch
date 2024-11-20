@@ -17,6 +17,13 @@ body {
 	display: none;
 }
 
+.copyright {
+	color: rgba(255, 255, 255, 0.7);
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: 14px;
+}
+
 /* Home container */
 .home-container {
 	position: relative;
@@ -327,8 +334,11 @@ body {
 .menu-footer {
 	position: sticky;
 	display: flex;
-	width: 100%;
+	justify-content: space-between;
+	align-items: center;
 	align-self: flex-end;
+	width: 100%;
+
 	bottom: 0;
 
 	padding: 0 10px;
@@ -353,6 +363,10 @@ body {
 	a:hover {
 		color: #348cff;
 	}
+}
+
+.menu-footer .copyright {
+	color: #2178eb;
 }
 
 .menu-toggle {
