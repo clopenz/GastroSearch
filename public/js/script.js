@@ -4,19 +4,21 @@ let locations = [];
 let markers = [];
 let currentInfoWindow;
 let hours = '';
+
+const placesContainer = document.querySelector('.places-container');
+const menuOpen = document.querySelector('.menu-open');
 const resultsContainer = document.querySelector('.results-container');
+const searchClose = document.querySelector('.search-toggle');
+const searchOpen = document.querySelector('.search-open');
+const miniSearchForm = document.querySelector('.search-form-mini');
 
 // Open and close menu
 document.querySelector('.menu-toggle').addEventListener('click', () => {
-	const placesContainer = document.querySelector('.places-container');
-	const menuOpen = document.querySelector('.menu-open');
 	menuOpen.classList.remove('hidden');
 	placesContainer.classList.add('hidden');
 });
 
 document.querySelector('.menu-open').addEventListener('click', () => {
-	const placesContainer = document.querySelector('.places-container');
-	const menuOpen = document.querySelector('.menu-open');
 	menuOpen.classList.add('hidden');
 	placesContainer.classList.remove('hidden');
 });
@@ -25,23 +27,20 @@ document.querySelector('.menu-open').addEventListener('click', () => {
 document
 	.querySelector('.search-form-mini .search-toggle')
 	.addEventListener('click', () => {
-		const miniSearchForm = document.querySelector('.search-form-mini');
 		miniSearchForm.classList.add('hidden');
 		setTimeout(() => (miniSearchForm.style.visibility = 'hidden'), 300);
 
-		const searchClose = document.querySelector('.search-toggle');
 		searchClose.classList.add('hide');
-		const searchOpen = document.querySelector('.search-open');
+
 		searchOpen.classList.remove('hidden');
 	});
 
 document.querySelector('.search-open').addEventListener('click', () => {
-	const miniSearchForm = document.querySelector('.search-form-mini');
 	miniSearchForm.style.visibility = 'visible';
 	miniSearchForm.classList.remove('hidden');
-	const searchClose = document.querySelector('.search-toggle');
+
 	searchClose.classList.remove('hide');
-	const searchOpen = document.querySelector('.search-open');
+
 	searchOpen.classList.add('hidden');
 });
 
@@ -62,9 +61,9 @@ function handleFormSubmit(formId) {
 	const state = document.querySelector(`${formId} #state`).value;
 	const zip = document.querySelector(`${formId} #zip`).value;
 
-	console.log('City:', city);
-	console.log('State:', state);
-	console.log('Zip:', zip);
+	// console.log('City:', city);
+	// console.log('State:', state);
+	// console.log('Zip:', zip);
 
 	if (!city && !state && !zip) {
 		alert('Please enter a city, state, or zip code.');
@@ -94,7 +93,7 @@ function fetchPlaces(url) {
 	fetch(url, { signal })
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data);
+			// console.log(data);
 
 			const places = document.querySelector('.places');
 			places.innerHTML = '';
@@ -216,7 +215,7 @@ function fetchPlaces(url) {
 		})
 		.catch((error) => {
 			if (error.name === 'AbortError') {
-				console.log('Previous request aborted, new request started.');
+				// console.log('Previous request aborted, new request started.');
 			} else {
 				console.error('Error:', error);
 			}
@@ -310,7 +309,7 @@ function convertToLatLng(city, state, zip) {
 	fetch(`/api/geocode?address=${encodeURIComponent(address)}`)
 		.then((response) => response.json())
 		.then((data) => {
-			console.log(data.latLng);
+			// console.log(data.latLng);
 			const { lat, lng } = data.latLng;
 
 			const searchUrl = `/api/places?location=${lat},${lng}&radius=50000&keyword=gastroenterologist+digestive+health+GI+doctor`;
@@ -325,7 +324,7 @@ function convertToLatLng(city, state, zip) {
 
 // Initialize Google Maps
 function initMap() {
-	console.log('Initializing map...');
+	// console.log('Initializing map...');
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: { lat: 39.8283, lng: -98.5795 },
 		zoom: 5,
@@ -338,7 +337,7 @@ function loadGoogleMapsScript() {
 	fetch('/api/maps')
 		.then((response) => response.text())
 		.then((url) => {
-			console.log('Loading Google Maps script...');
+			// console.log('Loading Google Maps script...');
 			const script = document.createElement('script');
 			script.src = url;
 			script.async = true;
@@ -352,8 +351,8 @@ function loadGoogleMapsScript() {
 
 function moveCenterLocation(lat, lng) {
 	if (map && typeof map.setCenter === 'function') {
-		console.log('Moving map center...');
-		console.log(lat, lng);
+		// console.log('Moving map center...');
+		// console.log(lat, lng);
 		// Move the center of the map and set the zoom level
 		map.setCenter({ lat, lng });
 		map.setZoom(12);
